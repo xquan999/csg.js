@@ -1,5 +1,5 @@
-import test from 'ava'
-import {CSG} from '../csg'
+var t = require('assert');
+var csg = require("../csg"); let CSG = csg.CSG; let CAG = csg.CAG;
 
 function createOperands () {
 
@@ -29,9 +29,9 @@ function checkGeomBounds (t, resultSolid, baseSolid, failMessage) {
     } else { t.pass() }
 }
 
-// perform test
-test.failing('CSG.complex_edgecase_subtract', t => {
-    const {a, b} = createOperands();
-    checkGeomBounds(t, a.subtract(b), a);
-});
+// // perform test
+// test.failing('CSG.complex_edgecase_subtract', function () {
+//     const {a, b} = createOperands();
+//     checkGeomBounds(t, a.subtract(b), a);
+// });
 

@@ -1,5 +1,5 @@
-import test from 'ava'
-import {CSG, CAG} from '../csg'
+var t = require('assert');
+var csg = require("../csg"); let CSG = csg.CSG; let CAG = csg.CAG;
 
 //
 // Test suite for CSG initialization (new)
@@ -7,50 +7,50 @@ import {CSG, CAG} from '../csg'
 // - verify that CSG functions do / return nothing
 // - verify that the CSG converts to/from properly
 //
-test('New CSG should contain nothing', t => {
+it('New CSG should contain nothing', function () {
   let csg = new CSG()
 
 // conversion functions
-  t.is(csg.toString(), 'CSG solid:\n')
+  t.equal(csg.toString(), 'CSG solid:\n')
 
-  t.true(Array.isArray(csg.toPolygons()))
-  t.is(csg.toPolygons().length, 0)
+  t.equal(Array.isArray(csg.toPolygons()), true)
+  t.equal(csg.toPolygons().length, 0)
 
   let feature = csg.getFeatures('volume')
-  t.is(feature, 0)
+  t.equal(feature, 0)
   let feature2 = csg.getFeatures('area')
-  t.is(feature2, 0)
+  t.equal(feature2, 0)
 
   let bounds = csg.getBounds()
-  t.true(Array.isArray(bounds))
-  t.is(bounds.length, 2)
-  t.is(typeof bounds[0], 'object')
-  t.is(typeof bounds[1], 'object')
+  t.equal(Array.isArray(bounds), true)
+  t.equal(bounds.length, 2)
+  t.equal(typeof bounds[0], 'object')
+  t.equal(typeof bounds[1], 'object')
 
   let vector0 = bounds[0]
-  t.is(typeof vector0, 'object')
-  t.is(vector0.x, 0)
-  t.is(vector0.y, 0)
-  t.is(vector0.z, 0)
+  t.equal(typeof vector0, 'object')
+  t.equal(vector0.x, 0)
+  t.equal(vector0.y, 0)
+  t.equal(vector0.z, 0)
   let vector1 = bounds[1]
-  t.is(typeof vector1, 'object')
-  t.is(vector1.x, 0)
-  t.is(vector1.y, 0)
-  t.is(vector1.z, 0)
+  t.equal(typeof vector1, 'object')
+  t.equal(vector1.x, 0)
+  t.equal(vector1.y, 0)
+  t.equal(vector1.z, 0)
 
   let triangles = csg.toTriangles()
-  t.is(triangles.length, 0)
+  t.equal(triangles.length, 0)
 
   let binary = csg.toCompactBinary()
-  t.is(binary.class, 'CSG')
-  t.is(binary.numPolygons, 0)
-  t.is(binary.numVerticesPerPolygon.length, 0)
-  t.is(binary.polygonPlaneIndexes.length, 0)
-  t.is(binary.polygonSharedIndexes.length, 0)
-  t.is(binary.polygonVertices.length, 0)
+  t.equal(binary.class, 'CSG')
+  t.equal(binary.numPolygons, 0)
+  t.equal(binary.numVerticesPerPolygon.length, 0)
+  t.equal(binary.polygonPlaneIndexes.length, 0)
+  t.equal(binary.polygonSharedIndexes.length, 0)
+  t.equal(binary.polygonVertices.length, 0)
 })
 
-test('New CSG should do nothing', t => {
+it('New CSG should do nothing', function () {
   let csg = new CSG()
 
 // tests for basic transforms
@@ -157,12 +157,12 @@ test('New CSG should do nothing', t => {
   // t.deepEqual(csg,acsg);
 })
 
-test('New CSG should return empty values', t => {
+it('New CSG should return empty values', function () {
   let csg = new CSG()
 
   let imatrix = new CSG.Matrix4x4()
   let aarray = csg.getTransformationAndInverseTransformationToFlatLying()
-  t.is(aarray.length, 2)
+  t.equal(aarray.length, 2)
   t.deepEqual(aarray[0], imatrix)
   t.deepEqual(aarray[1], imatrix)
 
@@ -187,7 +187,7 @@ test('New CSG should return empty values', t => {
   t.deepEqual(acsg, csg)
 })
 
-test('New CSG should convert properly', t => {
+it('New CSG should convert properly', function () {
   let csg = new CSG()
 
   let acb = csg.toCompactBinary()
@@ -200,7 +200,7 @@ test('New CSG should convert properly', t => {
   t.deepEqual(acsg, csg)
 
   let polygons = csg.toTriangles()
-  t.is(polygons.length, 0)
+  t.equal(polygons.length, 0)
   acsg = CSG.fromPolygons(polygons)
   t.deepEqual(acsg.polygons, polygons)
   t.deepEqual(acsg.isCanonicalized, false)

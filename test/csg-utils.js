@@ -1,5 +1,5 @@
-import test from 'ava'
-import {CSG, CAG} from '../csg'
+var t = require('assert');
+var csg = require("../csg"); let CSG = csg.CSG; let CAG = csg.CAG;
 
 // returns positions and tags for simplicity
 const flatPolygons = polygon => {
@@ -7,7 +7,7 @@ const flatPolygons = polygon => {
 }
 // TODO: note to self:  do actual in depth testing based on UNDERSTANDING the algorithm
 
-test('CSG.fixTJunctions fixes ...tjunctions', t => {
+it('CSG.fixTJunctions fixes ...tjunctions', function () {
   const input = new CSG.cube().fixTJunctions()
   // not strictily needed as there are no tjunctions, but polygons should stay intact
   const obsPolygons = input.polygons.map(flatPolygons).sort()
@@ -35,12 +35,12 @@ test('CSG.fixTJunctions fixes ...tjunctions', t => {
   [ 1, 1, -1, 7 ],
   [ 1, 1, 1, 8 ],
   [ 1, -1, 1, 5 ] ] ]
-  t.is(input.isCanonicalized, true)
+  t.equal(input.isCanonicalized, true)
   t.deepEqual(obsPolygons, expPolygons)
 })
 
 // yikes, horrible name
-test('CSG.fixTJunctions should work correctly even in corner cases', t => {
+it('CSG.fixTJunctions should work correctly even in corner cases', function () {
   const csgImage = CAG.fromPoints([ [ 25.183085182520657, -16.31346279512401 ],
     [ 25.399997999999997, -14.111109999999998 ],
     [ 25.18308518252066, -11.908757204875993 ],
@@ -250,6 +250,6 @@ test('CSG.fixTJunctions should work correctly even in corner cases', t => {
   [ 7.8393398633078135, -4.724742671313145, 0, 61 ],
   [ 9.791039592574927, -3.6815374319877257, 0, 59 ] ] ]
 
-  t.is(input.isCanonicalized, true)
+  t.equal(input.isCanonicalized, true)
   t.deepEqual(after, expectedPolygons)
 })

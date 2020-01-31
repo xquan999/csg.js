@@ -38,7 +38,9 @@ function assertSameGeometry (t, observed, expected, failMessage) {
   if (!containsCSG(observed, expected) || !containsCSG(observed, expected)) {
     failMessage = failMessage === undefined ? 'CSG do not have the same geometry' : failMessage
     t.fail(failMessage)
-  } else { t.pass() }
+  } else {
+    //t.pass()
+  }
 }
 
 // a contains b if b polygons are also found in a

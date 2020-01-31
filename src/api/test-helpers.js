@@ -44,7 +44,7 @@ function simplifiedCSG (csg) {
 }
 
 function almostEquals (t, observed, expected, precision) {
-  t.is(Math.abs(expected - observed) < precision, true)
+  t.equal(Math.abs(expected - observed) < precision, true)
 }
 
 function compareNumbers (a, b, precision) {

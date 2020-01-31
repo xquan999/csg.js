@@ -1,12 +1,12 @@
-const test = require('ava')
-const {CAG} = require('../csg')
+var t = require('assert');
+var csg = require("../csg"); let CSG = csg.CSG; let CAG = csg.CAG;
 const clearTags = require('./helpers/clearTags')
 
 //
 // Test suite for CAG Conversions
 //
 
-test('CAG should convert to and from binary', t => {
+it('CAG should convert to and from binary', function () {
   // test using simple default shapes
   // In the current form this test cannot be working, something comparing
   // sides one by one should be written as objects differs
@@ -30,7 +30,7 @@ test('CAG should convert to and from binary', t => {
   t.deepEqual(clearTags(c4), r4)
 })
 
-test('CAG should convert to and from anonymous object', t => {
+it('CAG should convert to and from anonymous object', function () {
   // test using simple default shapes
   var c1 = CAG.circle()
   var c2 = CAG.ellipse()
@@ -51,7 +51,7 @@ test('CAG should convert to and from anonymous object', t => {
   t.deepEqual(c4, r4)
 })
 
-test('CAG should convert to and from sides', t => {
+it('CAG should convert to and from sides', function () {
   // test using simple default shapes
   var c1 = CAG.circle()
   var c2 = CAG.ellipse()
@@ -72,7 +72,7 @@ test('CAG should convert to and from sides', t => {
   t.deepEqual(c4, f4)
 })
 
-test('CAG should convert to and from points', t => {
+it('CAG should convert to and from points', function () {
   // test using simple default shapes
   var c1 = CAG.circle()
   var c2 = CAG.ellipse()
@@ -101,7 +101,7 @@ test('CAG should convert to and from points', t => {
   // t.deepEqual(c4, v4)
 })
 
-test('CAG should convert to and from paths', t => {
+it('CAG should convert to and from paths', function () {
   // fails because of https://github.com/jscad/csg.js/issues/15
 
   // test using simple default shapes

@@ -1,11 +1,11 @@
-const test = require('ava')
+var t = require('assert');
 const { cube, sphere, geodesicSphere, cylinder, torus, polyhedron } = require('./primitives3d-api')
 const { simplifiedPolygon, comparePolygons } = require('./test-helpers.js')
 
 /* FIXME : not entirely sure how to deal with this, but for now relies on inspecting
 output data structures: we should have higher level primitives ... */
 
-test('cube (defaults)', t => {
+it('cube (defaults)', function () {
   const obs = cube()
   const expFirstPoly = {
     vertices: [ { pos: { _x: 0, _y: 0, _z: 0 } },
@@ -29,7 +29,7 @@ test('cube (defaults)', t => {
   t.deepEqual(obs.polygons[5], expPoly5)
 })
 
-test('cube (custom size, single parameter)', t => {
+it('cube (custom size, single parameter)', function () {
   const obs = cube(2)
   const expFirstPoly = {
     vertices: [ { pos: { _x: 0, _y: 0, _z: 0 } },
@@ -53,7 +53,7 @@ test('cube (custom size, single parameter)', t => {
   t.deepEqual(obs.polygons[5], expPoly5)
 })
 
-test('cube (custom size, single value, object parameter)', t => {
+it('cube (custom size, single value, object parameter)', function () {
   const obs = cube({size: 2})
   const expFirstPoly = {
     vertices: [ { pos: { _x: 0, _y: 0, _z: 0 } },
@@ -77,7 +77,7 @@ test('cube (custom size, single value, object parameter)', t => {
   t.deepEqual(obs.polygons[5], expPoly5)
 })
 
-test('cube (custom size, array value, object parameter)', t => {
+it('cube (custom size, array value, object parameter)', function () {
   const obs = cube({size: [2, 1, 3]})
   const expFirstPoly = {
     vertices: [ { pos: { _x: 0, _y: 0, _z: 0 } },
@@ -101,7 +101,7 @@ test('cube (custom size, array value, object parameter)', t => {
   t.deepEqual(obs.polygons[5], expPoly5)
 })
 
-test('cube (standard size, custom center(booleans), object parameter)', t => {
+it('cube (standard size, custom center(booleans), object parameter)', function () {
   const obs = cube({size: 1, center: [false, true, false]})
   const expFirstPoly = {
     vertices: [ { pos: { _x: 0, _y: -0.5, _z: 0 } },
@@ -125,7 +125,7 @@ test('cube (standard size, custom center(booleans), object parameter)', t => {
   t.deepEqual(obs.polygons[5], expPoly5)
 })
 
-test('cube (standard size, rounded)', t => {
+it('cube (standard size, rounded)', function () {
   const obs = cube({round: true})
   const expFirstPoly = {
     vertices: [ { pos: { _x: 0.09999999999999998, _y: 0, _z: 0.09999999999999998 } },
@@ -164,7 +164,7 @@ test('cube (standard size, rounded)', t => {
   t.deepEqual(obs.polygons[5], expPoly5)
 })
 
-test('cube (custom size, rounded)', t => {
+it('cube (custom size, rounded)', function () {
   const obs = cube({size: [69, 20, 3], round: true, radius: 0.5})
 
   const expFirstPoly = {
@@ -204,7 +204,7 @@ test('cube (custom size, rounded)', t => {
   t.deepEqual(obs.polygons[5], expPoly5)
 })
 
-test('sphere (defaults)', t => {
+it('sphere (defaults)', function () {
   const obs = sphere()
   const expFirstPoly = {
     vertices: [ { pos: { _x: 1, _y: 0, _z: 0 } },
@@ -229,7 +229,7 @@ test('sphere (defaults)', t => {
   t.deepEqual(obs.polygons[511], expPoly511)
 })
 
-test('sphere (geodesic)', t => {
+it('sphere (geodesic)', function () {
   const obs = sphere({type: 'geodesic'})
   const expFirstPoly = {
     vertices: [
@@ -253,7 +253,7 @@ test('sphere (geodesic)', t => {
   t.deepEqual(obs.polygons[499], expPoly499)
 })
 
-test('sphere (custom radius , resolution, center)', t => {
+it('sphere (custom radius , resolution, center)', function () {
   const obs = sphere({r: 2, fn: 10, center: [true, true, false]})
   const expFirstPoly = {
     vertices: [ { pos: { _x: 2, _y: 0, _z: 2 } },
@@ -277,11 +277,11 @@ test('sphere (custom radius , resolution, center)', t => {
 
   t.deepEqual(obs.properties.sphere.center, {_x: 0, _y: 0, _z: 2})
   t.deepEqual(obs.polygons.length, 60)
-  t.is(comparePolygons(obs.polygons[0], expFirstPoly, 0.000001), true)
-  t.is(comparePolygons(obs.polygons[59], expPoly59, 0.000001), true)
+  t.equal(comparePolygons(obs.polygons[0], expFirstPoly, 0.000001), true)
+  t.equal(comparePolygons(obs.polygons[59], expPoly59, 0.000001), true)
 })
 
-test('cylinder (defaults)', t => {
+it('cylinder (defaults)', function () {
   const obs = cylinder()
   const expFirstPoly = {
     vertices: [ { pos: { _x: 0, _y: 0, _z: 0 } },
@@ -303,7 +303,7 @@ test('cylinder (defaults)', t => {
   t.deepEqual(obs.polygons[95], expPoly95)
 })
 
-test('cylinder (defaults)', t => {
+it('cylinder (defaults)', function () {
   const obs = cylinder()
   const expFirstPoly = {
     vertices: [ { pos: { _x: 0, _y: 0, _z: 0 } },
@@ -325,7 +325,7 @@ test('cylinder (defaults)', t => {
   t.deepEqual(obs.polygons[95], expPoly95)
 })
 
-test('cylinder (custom radius, height, center, resolution)', t => {
+it('cylinder (custom radius, height, center, resolution)', function () {
   const obs = cylinder({r: 2, h: 10, center: [true, true, false], fn: 10})
   const expFirstPoly = {
     vertices: [ { pos: { _x: 0, _y: 0, _z: 0 } },
@@ -343,11 +343,11 @@ test('cylinder (custom radius, height, center, resolution)', t => {
   t.deepEqual(obs.properties.cylinder.start, {point: {_x: 0, _y: 0, _z: 0}, axisvector: {_x: -0, _y: -0, _z: -1}, normalvector: {_x: 1, _y: 0, _z: 0}})
   t.deepEqual(obs.properties.cylinder.end, {point: {_x: 0, _y: 0, _z: 10}, axisvector: {_x: 0, _y: 0, _z: 1}, normalvector: {_x: 1, _y: 0, _z: 0}})
   t.deepEqual(obs.polygons.length, 30)
-  t.is(comparePolygons(obs.polygons[0], expFirstPoly, 0.000001), true)
-  t.is(comparePolygons(obs.polygons[29], expPoly29, 0.000001), true)
+  t.equal(comparePolygons(obs.polygons[0], expFirstPoly, 0.000001), true)
+  t.equal(comparePolygons(obs.polygons[29], expPoly29, 0.000001), true)
 })
 
-test('cylinder (custom double radius, rounded)', t => {
+it('cylinder (custom double radius, rounded)', function () {
   const obs = cylinder({r1: 2, r2: 3, round: true})
   const expFirstPoly = {
     vertices: [ { pos: { _x: 0.19509032201612825, _y: 0.9807852804032304, _z: 0 } },
@@ -372,7 +372,7 @@ test('cylinder (custom double radius, rounded)', t => {
   t.deepEqual(obs.polygons[543], expPoly543)
 })
 
-test('cylinder (custom double diameter, rounded)', t => {
+it('cylinder (custom double diameter, rounded)', function () {
   const obs = cylinder({d1: 1, d2: 1.5, round: true})
   const expFirstPoly = {
     vertices: [ { pos: { _x: 0.19509032201612825, _y: 0.9807852804032304, _z: 0 } },
@@ -397,7 +397,7 @@ test('cylinder (custom double diameter, rounded)', t => {
   t.deepEqual(obs.polygons[543], expPoly543)
 })
 
-test('cylinder (custom double diameter, rounded, start, end)', t => {
+it('cylinder (custom double diameter, rounded, start, end)', function () {
   const obs = cylinder({d1: 1, d2: 1.5, round: true, start: [0, 0, 0], end: [0, 0, 10]})
   const expFirstPoly = {
     vertices: [ { pos: { _x: 0.19509032201612825, _y: 0.9807852804032304, _z: 0 } },
@@ -422,7 +422,7 @@ test('cylinder (custom double diameter, rounded, start, end)', t => {
   t.deepEqual(obs.polygons[543], expPoly543)
 })
 
-test('torus (defaults)', t => {
+it('torus (defaults)', function () {
   const obs = torus()
   const expFirstPoly = { positions:
   [ [ 4.923879532511286, 5.551115123125783e-17, -0.3826834323650904 ],
@@ -458,7 +458,7 @@ test('torus (defaults)', t => {
   t.deepEqual(simplifiedPolygon(obs.polygons[obs.polygons.length - 1]), expLastPoly)
 })
 
-test('torus (custom all)', t => {
+it('torus (custom all)', function () {
   const obs = torus({ ro: 5, ri: 3, fni: 4, fno: 5, roti: 45 })
   const expFirstPoly = { positions:
   [ [ 7.121320343559641, 0, 2.1213203435596424 ],
@@ -501,7 +501,7 @@ test('torus (custom all)', t => {
   t.deepEqual(simplifiedPolygon(obs.polygons[19]), expLastPoly)
 })
 
-test('polyhedron (points & triangles)', t => {
+it('polyhedron (points & triangles)', function () {
   const obs = polyhedron({
     points: [ [10, 10, 0], [10, -10, 0], [-10, -10, 0], [-10, 10, 0], [0, 0, 10] ], // the apex point
     triangles: [ [0, 1, 4], [1, 2, 4], [2, 3, 4], [3, 0, 4], [1, 0, 3], [2, 1, 3] ] // two triangles for square base
@@ -525,7 +525,7 @@ test('polyhedron (points & triangles)', t => {
   t.deepEqual(obs.polygons[5], expLastPoly)
 })
 
-test('polyhedron (points & polygons)', t => {
+it('polyhedron (points & polygons)', function () {
   const obs = polyhedron({
     points: [ [10, 10, 0], [10, -10, 0], [-10, -10, 0], [-10, 10, 0], [0, 0, 10] ], // the apex point
     polygons: [ [0, 1, 4], [1, 2, 4], [2, 3, 4], [3, 0, 4], [1, 0, 3], [2, 1, 3] ] // two triangles for square base

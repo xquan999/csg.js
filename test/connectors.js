@@ -1,11 +1,11 @@
-import test from 'ava'
-import {CSG} from '../csg'
+var t = require('assert');
+var csg = require("../csg"); let CSG = csg.CSG; let CAG = csg.CAG;
 
-test('CSG.Connector exists', t => {
-  t.is('Connector' in CSG, true)
+it('CSG.Connector exists', function () {
+  t.equal('Connector' in CSG, true)
 })
 
-test('CSG.connectorslist can be instanciated', t => {
+it('CSG.connectorslist can be instanciated', function () {
   const observed = new CSG.ConnectorList()
 
   t.deepEqual(observed, {connectors_: []})

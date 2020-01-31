@@ -1,9 +1,9 @@
-const test = require('ava')
+var t = require('assert');
 const { square } = require('./primitives2d-api')
 const { linear_extrude, rotate_extrude, rectangular_extrude } = require('./ops-extrusions')
 const { simplifiedPolygon } = require('./test-helpers')
 
-test('linear_extrude (height)', t => {
+it('linear_extrude (height)', function () {
   const op1 = square()
   const obs = linear_extrude({ height: 10 }, op1)
 
@@ -29,7 +29,7 @@ test('linear_extrude (height)', t => {
   t.deepEqual(obs.polygons[obs.polygons.length - 1], expLastPoly)
 })
 
-test('linear_extrude (height, twist, slices, center)', t => {
+it('linear_extrude (height, twist, slices, center)', function () {
   const op1 = square()
   const obs = linear_extrude({ height: 10, twist: 360, slices: 50, center: true }, op1)
 
@@ -56,7 +56,7 @@ test('linear_extrude (height, twist, slices, center)', t => {
   t.deepEqual(obs.polygons[obs.polygons.length - 1], expLastPoly)
 })
 
-test('rotate_extrude (defaults)', t => {
+it('rotate_extrude (defaults)', function () {
   const op1 = square()
   const obs = rotate_extrude(op1.translate([4, 0, 0]))
 
@@ -85,7 +85,7 @@ test('rotate_extrude (defaults)', t => {
   t.deepEqual(simplifiedPolygon(obs.polygons[obs.polygons.length - 1]), expLastPoly)
 })
 
-test('rotate_extrude (custom resolution)', t => {
+it('rotate_extrude (custom resolution)', function () {
   const op1 = square()
   const obs = rotate_extrude({fn: 4}, op1.translate([4, 0, 0]))
 
@@ -114,7 +114,7 @@ test('rotate_extrude (custom resolution)', t => {
   t.deepEqual(simplifiedPolygon(obs.polygons[obs.polygons.length - 1]), expLastPoly)
 })
 
-test('rotate_extrude (custom angle)', t => {
+it('rotate_extrude (custom angle)', function () {
   const op1 = square()
   const obs = rotate_extrude({angle: 20}, op1.translate([4, 0, 0]))
 
@@ -142,7 +142,7 @@ test('rotate_extrude (custom angle)', t => {
   t.deepEqual(simplifiedPolygon(obs.polygons[obs.polygons.length - 1]), expLastPoly)
 })
 
-test('rotate_extrude (custom negative angle)', t => {
+it('rotate_extrude (custom negative angle)', function () {
   const op1 = square()
   const obs = rotate_extrude({angle: -20}, op1.translate([4, 0, 0]))
 
@@ -170,7 +170,7 @@ test('rotate_extrude (custom negative angle)', t => {
   t.deepEqual(simplifiedPolygon(obs.polygons[obs.polygons.length - 1]), expLastPoly)
 })
 
-test('rotate_extrude (custom negative angle, custom start angle)', t => {
+it('rotate_extrude (custom negative angle, custom start angle)', function () {
   const op1 = square()
   const obs = rotate_extrude({angle: -20, startAngle: 27}, op1.translate([4, 0, 0]))
 
@@ -198,7 +198,7 @@ test('rotate_extrude (custom negative angle, custom start angle)', t => {
   t.deepEqual(simplifiedPolygon(obs.polygons[obs.polygons.length - 1]), expLastPoly)
 })
 
-test('rotate_extrude (custom negative angle, custom start angle, capped points)', t => {
+it('rotate_extrude (custom negative angle, custom start angle, capped points)', function () {
   const op1 = square().translate([-0.5, 0, 0])
   const obs = rotate_extrude({angle: -20, startAngle: 27}, op1)
 
@@ -257,14 +257,14 @@ test('rotate_extrude (custom negative angle, custom start angle, capped points)'
   t.deepEqual(simplifiedPolygon(obs.polygons[obs.polygons.length - 1]), expLastPoly)
 })
 
-test('rotate_extrude (invalid overflow setting should throw an exception)', t => {
+it('rotate_extrude (invalid overflow setting should throw an exception)', function () {
   const op1 = square().translate([-0.5, 0, 0])
   t.throws(() => {
     rotate_extrude({angle: -20, startAngle: 27, overflow: undefined}, op1)
   }, 'only capping of overflowing points is supported !')
 })
 
-test('rectangular_extrude ', t => {
+it('rectangular_extrude ', function () {
   const op1 = square()
   const obs = rectangular_extrude([ [10, 10], [-10, 10], [-20, 0], [-10, -10], [10, -10] ], // path is an array of 2d coords
     {w: 1, h: 3, closed: true}, op1)

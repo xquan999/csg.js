@@ -1,4 +1,4 @@
-const test = require('ava')
+var t = require('assert');
 const { vector_text, vector_char, vectorChar, vectorText } = require('./text')
 
 const questionMarkSegments = [ // '?'
@@ -15,7 +15,7 @@ const openTextSegments = [ // 'Open'
 [[63,10],[66,13],[68,14],[71,14],[73,13],[74,10],[74,0]]
 ]
 
-test('vector_char (x, y, char)', t => {
+it('vector_char (x, y, char)', function () {
   const obs = vector_char(0, 0, '?')
 
   t.deepEqual(obs.width, 18)
@@ -23,13 +23,13 @@ test('vector_char (x, y, char)', t => {
   t.deepEqual(obs.segments, questionMarkSegments)
 })
 
-test('vector_text (x, y, text)', t => {
+it('vector_text (x, y, text)', function () {
   const obs = vector_text(0, 0, 'Open')
 
   t.deepEqual(obs, openTextSegments)
 })
 
-test('vectorChar (defaults)', t => {
+it('vectorChar (defaults)', function () {
   const obs = vectorChar()
 
   t.deepEqual(obs.width, 18)
@@ -37,7 +37,7 @@ test('vectorChar (defaults)', t => {
   t.deepEqual(obs.segments, questionMarkSegments)
 })
 
-test('vectorChar (char)', t => {
+it('vectorChar (char)', function () {
   const obs = vectorChar('H')
   const expSegments = [
     [[4,21],[4,0]],
@@ -50,7 +50,7 @@ test('vectorChar (char)', t => {
   t.deepEqual(obs.segments, expSegments)
 })
 
-test('vectorChar ({ xOffset, yOffset }, char)', t => {
+it('vectorChar ({ xOffset, yOffset }, char)', function () {
   const obs = vectorChar({ xOffset: 10, yOffset: 20 }, 'H')
   const expSegments = [
     [[14,41],[14,20]],
@@ -63,7 +63,7 @@ test('vectorChar ({ xOffset, yOffset }, char)', t => {
   t.deepEqual(obs.segments, expSegments)
 })
 
-test('vectorChar ({ height }, char)', t => {
+it('vectorChar ({ height }, char)', function () {
   const obs = vectorChar({ height: 10, input: 'h' })
   const expSegments = [
     [[2.857142857142857,15],[2.857142857142857,0]],
@@ -75,7 +75,7 @@ test('vectorChar ({ height }, char)', t => {
   t.deepEqual(obs.segments, expSegments)
 })
 
-test('vectorText (text)', t => {
+it('vectorText (text)', function () {
   const obs = vectorText('OpenJSCAD')
   const expSegments = openTextSegments.concat([
     [[90,21],[90,5],[89,2],[88,1],[86,0],[84,0],[82,1],[81,2],[80,5],[80,7]],
@@ -91,7 +91,7 @@ test('vectorText (text)', t => {
   t.deepEqual(obs, expSegments)
 })
 
-test('vectorText (multi-line-text)', t => {
+it('vectorText (multi-line-text)', function () {
   const obs = vectorText('Open\nJSCAD')
   const expSegments = openTextSegments.concat([
     [[12,-9],[12,-25],[11,-28],[10,-29],[8,-30],[6,-30],[4,-29],[3,-28],[2,-25],[2,-23]],
@@ -107,7 +107,7 @@ test('vectorText (multi-line-text)', t => {
   t.deepEqual(obs, expSegments)
 })
 
-test('vectorText ({ yOffset }, text)', t => {
+it('vectorText ({ yOffset }, text)', function () {
   const obs = vectorText({ yOffset: 20 }, 'y20')
   const expSegments = [
     [[2,34],[8,20]],
@@ -119,7 +119,7 @@ test('vectorText ({ yOffset }, text)', t => {
   t.deepEqual(obs, expSegments)
 })
 
-test('vectorText ({ xOffset, input, letterSpacing })', t => {
+it('vectorText ({ xOffset, input, letterSpacing })', function () {
   const obs = vectorText({ xOffset: -10, input: 'space', letterSpacing: 1.5 })
   const expSegments = [
     [[4,11],[3,13],[0,14],[-3,14],[-6,13],[-7,11],[-6,9],[-4,8],[1,7],[3,6],[4,4],[4,3],[3,1],[0,0],[-3,0],[-6,1],[-7,3]],
@@ -134,7 +134,7 @@ test('vectorText ({ xOffset, input, letterSpacing })', t => {
   t.deepEqual(obs, expSegments)
 })
 
-test('vectorText ({ height, extrudeOffset }, text)', t => {
+it('vectorText ({ height, extrudeOffset }, text)', function () {
   const obs = vectorText({ height: 12, extrudeOffset: 2 }, 'size')
   const expSegments = [
     [[10,8.857142857142858],[9.285714285714286,10.285714285714286],[7.142857142857143,11],[5,11],[2.857142857142857,10.285714285714286],[2.142857142857143,8.857142857142858],[2.857142857142857,7.428571428571429],[4.285714285714286,6.714285714285714],[7.857142857142858,6],[9.285714285714286,5.285714285714286],[10,3.857142857142857],[10,3.142857142857143],[9.285714285714286,1.7142857142857144],[7.142857142857143,1],[5,1],[2.857142857142857,1.7142857142857144],[2.142857142857143,3.142857142857143]],
@@ -149,7 +149,7 @@ test('vectorText ({ height, extrudeOffset }, text)', t => {
   t.deepEqual(obs, expSegments)
 })
 
-test('vectorText ({ align: center }, text)', t => {
+it('vectorText ({ align: center }, text)', function () {
   const obs = vectorText({ align: 'center' }, 'a\nab\nabc')
   const expSegments = [
     [[33.5,14],[33.5,0]],
@@ -168,7 +168,7 @@ test('vectorText ({ align: center }, text)', t => {
   t.deepEqual(obs, expSegments)
 })
 
-test('vectorText ({ align: right }, text)', t => {
+it('vectorText ({ align: right }, text)', function () {
   const obs = vectorText({ align: 'right' }, 'a\nab\nabc')
   const expSegments = [
     [[52,14],[52,0]],

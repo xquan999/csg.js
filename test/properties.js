@@ -1,6 +1,6 @@
-import test from 'ava'
-import {CSG} from '../csg'
+var t = require('assert');
+var csg = require("../csg"); let CSG = csg.CSG; let CAG = csg.CAG;
 
-test('CSG.Properties exists', t => {
-  t.is('Properties' in CSG, true)
+it('CSG.Properties exists', function () {
+  t.equal('Properties' in CSG, true)
 })

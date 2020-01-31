@@ -1,12 +1,12 @@
-import test from 'ava'
-import {CSG, CAG, isCAG, isCSG} from '../csg'
+var t = require('assert');
+const {CSG, CAG, isCAG, isCSG} = require('../csg')
 
-test('isCSG() is correctly determining if object is a CSG', t => {
+it('isCSG() is correctly determining if object is a CSG', function () {
   const emptyCSG = new CSG()
-  t.is(isCSG(emptyCSG), true)
+  t.equal(isCSG(emptyCSG), true)
 })
 
-test('isCAG() is correctly determining if object is a CAG', t => {
+it('isCAG() is correctly determining if object is a CAG', function () {
   const emptyCAG = new CAG()
-  t.is(isCAG(emptyCAG), true)
+  t.equal(isCAG(emptyCAG), true)
 })

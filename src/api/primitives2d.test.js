@@ -1,4 +1,4 @@
-const test = require('ava')
+var t = require('assert');
 const { square, circle, triangle, polygon } = require('./primitives2d-api')
 const { sideEquals, shape2dToNestedArray } = require('./test-helpers')
 
@@ -18,32 +18,32 @@ function comparePositonVertices (obs, exp) {
   }
   return true
 }
+//
+// test.failing('triangle (defaults)', function () {
+//   const obs = triangle()
+//
+//   const expSides = [
+//     [[0, 1], [0, 0]],
+//     [[0, 0], [1, 0]],
+//     [[1, 0], [1, 1]]
+//   ]
+//   t.deepEqual(obs.sides.length, 3)
+//   t.equal(true, comparePositonVertices(obs.sides, expSides))
+// })
+//
+// test.failing('triangle (custom size)', function () {
+//   const obs = triangle(5)
+//
+//   const expSides = [
+//     [[0, 1], [0, 0]],
+//     [[0, 0], [1, 0]],
+//     [[1, 0], [1, 1]]
+//   ]
+//   t.deepEqual(obs.sides.length, 3)
+//   t.equal(true, comparePositonVertices(obs.sides, expSides))
+// })
 
-test.failing('triangle (defaults)', t => {
-  const obs = triangle()
-
-  const expSides = [
-    [[0, 1], [0, 0]],
-    [[0, 0], [1, 0]],
-    [[1, 0], [1, 1]]
-  ]
-  t.deepEqual(obs.sides.length, 3)
-  t.truthy(comparePositonVertices(obs.sides, expSides))
-})
-
-test.failing('triangle (custom size)', t => {
-  const obs = triangle(5)
-
-  const expSides = [
-    [[0, 1], [0, 0]],
-    [[0, 0], [1, 0]],
-    [[1, 0], [1, 1]]
-  ]
-  t.deepEqual(obs.sides.length, 3)
-  t.truthy(comparePositonVertices(obs.sides, expSides))
-})
-
-test('square (defaults)', t => {
+it('square (defaults)', function () {
   const obs = square()
 
   const expSides = [
@@ -53,10 +53,10 @@ test('square (defaults)', t => {
     [[1, 1], [0, 1]]
   ]
   t.deepEqual(obs.sides.length, 4)
-  t.truthy(comparePositonVertices(obs.sides, expSides))
+  t.equal(true, comparePositonVertices(obs.sides, expSides))
 })
 
-test('square (custom size, 2d array parameter)', t => {
+it('square (custom size, 2d array parameter)', function () {
   const obs = square([2, 3])
 
   const expSides = [
@@ -67,10 +67,10 @@ test('square (custom size, 2d array parameter)', t => {
   ]
 
   t.deepEqual(obs.sides.length, 4)
-  t.truthy(comparePositonVertices(obs.sides, expSides))
+  t.equal(true, comparePositonVertices(obs.sides, expSides))
 })
 
-test('square (custom size, size object parameter)', t => {
+it('square (custom size, size object parameter)', function () {
   const obs = square({size: [2, 3]})
 
   const expSides = [
@@ -81,10 +81,10 @@ test('square (custom size, size object parameter)', t => {
   ]
 
   t.deepEqual(obs.sides.length, 4)
-  t.truthy(comparePositonVertices(obs.sides, expSides))
+  t.equal(true, comparePositonVertices(obs.sides, expSides))
 })
 
-test('square (default size, centered)', t => {
+it('square (default size, centered)', function () {
   const obs = square({center: true})
 
   const expSides = [
@@ -95,10 +95,10 @@ test('square (default size, centered)', t => {
   ]
 
   t.deepEqual(obs.sides.length, 4)
-  t.truthy(comparePositonVertices(obs.sides, expSides))
+  t.equal(true, comparePositonVertices(obs.sides, expSides))
 })
 
-test('square (custom size, centered)', t => {
+it('square (custom size, centered)', function () {
   const obs = square({size: [2, 3], center: true})
 
   const expSides = [ [ [ -1, 1.5 ], [ -1, -1.5 ] ],
@@ -107,10 +107,10 @@ test('square (custom size, centered)', t => {
   [ [ 1, 1.5 ], [ -1, 1.5 ] ] ]
 
   t.deepEqual(obs.sides.length, 4)
-  t.truthy(comparePositonVertices(obs.sides, expSides))
+  t.equal(true, comparePositonVertices(obs.sides, expSides))
 })
 
-test('circle (defaults)', t => {
+it('circle (defaults)', function () {
   const obs = circle()
 
   // points that make up our circle
@@ -223,7 +223,7 @@ test('circle (defaults)', t => {
   t.deepEqual(shape2dToNestedArray(obs), expected)
 })
 
-test('circle (custom radius)', t => {
+it('circle (custom radius)', function () {
   const obs = circle(10)
 
   // we just use a sample of points for simplicity
@@ -232,7 +232,7 @@ test('circle (custom radius)', t => {
   sideEquals(t, obs.sides[obs.sides.length - 1], [[19.238795325112864, 6.173165676349096], [19.8078528040323, 8.049096779838713]])
 })
 
-test('circle (custom radius, object as parameter)', t => {
+it('circle (custom radius, object as parameter)', function () {
   const obs = circle({r: 10})
 
   // we just use a sample of points for simplicity
@@ -241,7 +241,7 @@ test('circle (custom radius, object as parameter)', t => {
   sideEquals(t, obs.sides[obs.sides.length - 1], [[19.238795325112864, 6.173165676349096], [19.8078528040323, 8.049096779838713]])
 })
 
-test('circle (custom radius, custom resolution, object as parameter)', t => {
+it('circle (custom radius, custom resolution, object as parameter)', function () {
   const obs = circle({r: 10, fn: 5})
 
   // we just use a sample of points for simplicity
@@ -250,7 +250,7 @@ test('circle (custom radius, custom resolution, object as parameter)', t => {
   sideEquals(t, obs.sides[obs.sides.length - 1], [[1.9098300562505255, 4.12214747707527], [13.090169943749473, 0.4894348370484636]])
 })
 
-test('circle (custom radius, custom resolution, centered object as parameter)', t => {
+it('circle (custom radius, custom resolution, centered object as parameter)', function () {
   const obs = circle({center: true, r: 10, fn: 5})
 
   // we just use a sample of points for simplicity
@@ -269,51 +269,51 @@ const triangleSides = [[[5, 20], [0, 11]], [[0, 11], [10, 11]], [[10, 11], [5, 2
 const squareSides = [[[0, 10], [0, 0]], [[0, 0], [10, 0]], [[10, 0], [10, 10]], [[10, 10], [0, 10]]]
 const houseSides = squareSides.concat(triangleSides)
 
-test('polygon (points[])', t => {
+it('polygon (points[])', function () {
   const obs = polygon(squarePoints)
   t.deepEqual(obs.sides.length, squareSides.length)
-  t.truthy(comparePositonVertices(obs.sides, squareSides))
+  t.equal(true, comparePositonVertices(obs.sides, squareSides))
 })
 
-test('polygon (points[][])', t => {
+it('polygon (points[][])', function () {
   const obs = polygon(houseNestedPoints)
   t.deepEqual(obs.sides.length, houseSides.length)
-  t.truthy(comparePositonVertices(obs.sides, houseSides))
+  t.equal(true, comparePositonVertices(obs.sides, houseSides))
 })
 
-test('polygon (params.points[])', t => {
+it('polygon (params.points[])', function () {
   const obs = polygon({ points: squarePoints })
   t.deepEqual(obs.sides.length, squareSides.length)
-  t.truthy(comparePositonVertices(obs.sides, squareSides))
+  t.equal(true, comparePositonVertices(obs.sides, squareSides))
 })
 
-test('polygon (params.points[][])', t => {
+it('polygon (params.points[][])', function () {
   const obs = polygon({ points: houseNestedPoints })
   t.deepEqual(obs.sides.length, houseSides.length)
-  t.truthy(comparePositonVertices(obs.sides, houseSides))
+  t.equal(true, comparePositonVertices(obs.sides, houseSides))
 })
 
-test('polygon (params.points[], params.paths[])', t => {
+it('polygon (params.points[], params.paths[])', function () {
   const obs = polygon({ points: squarePoints, paths: [0, 1, 2, 3] })
   t.deepEqual(obs.sides.length, squareSides.length)
-  t.truthy(comparePositonVertices(obs.sides, squareSides))
+  t.equal(true, comparePositonVertices(obs.sides, squareSides))
 })
 
-test('polygon (params.points[], params.paths[] - partial path)', t => {
+it('polygon (params.points[], params.paths[] - partial path)', function () {
   // get the square from flat house points list
   const obs = polygon({ points: houseFlatPoints, paths: [3, 4, 5, 6] })
   t.deepEqual(obs.sides.length, squareSides.length)
-  t.truthy(comparePositonVertices(obs.sides, squareSides))
+  t.equal(true, comparePositonVertices(obs.sides, squareSides))
 })
 
-test('polygon (params.points[][], params.paths[][] - two paths)', t => {
+it('polygon (params.points[][], params.paths[][] - two paths)', function () {
   // get the square and the triangle from nested house points list
   const obs = polygon({ points: houseNestedPoints, paths: [[0, 1, 2], [3, 4, 5, 6]] })
   t.deepEqual(obs.sides.length, houseSides.length)
-  t.truthy(comparePositonVertices(obs.sides, houseSides))
+  t.equal(true, comparePositonVertices(obs.sides, houseSides))
 })
 
-test('polygon (nested points array, with holes)', t => {
+it('polygon (nested points array, with holes)', function () {
   const obs = polygon([
     [ [0,0], [0,10], [10,10], [10,0] ],
     [ [2,2], [2,8], [8,8], [8,2] ],
@@ -342,10 +342,10 @@ test('polygon (nested points array, with holes)', t => {
 
   // we just use a sample of points for simplicity
   t.deepEqual(obs.sides.length, 16)
-  t.truthy(comparePositonVertices(obs.sides, expSides))
+  t.equal(true, comparePositonVertices(obs.sides, expSides))
 })
 
-test('polygon (nested points array, with single path)', t => {
+it('polygon (nested points array, with single path)', function () {
   const obs = polygon([ [ [0,0], [0,10], [10,10], [10,0] ] ])
 
   const expSides = [
@@ -357,5 +357,5 @@ test('polygon (nested points array, with single path)', t => {
 
   // we just use a sample of points for simplicity
   t.deepEqual(obs.sides.length, 4)
-  t.truthy(comparePositonVertices(obs.sides, expSides))
+  t.equal(true, comparePositonVertices(obs.sides, expSides))
 })

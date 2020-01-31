@@ -1,10 +1,10 @@
-const test = require('ava')
+var t = require('assert');
 const Vertex = require('../src/core/math/Vertex3')
 const Vector3D = require('../src/core/math/Vector3')
 const Polygon = require('../src/core/math/Polygon3')
 const {fromPolygons, fromObject} = require('../src/core/CSGFactories')
 
-test('CSG can be created from polygons', t => {
+it('CSG can be created from polygons', function () {
   const vertices = [
     new Vertex(new Vector3D([0, 0, 0])),
     new Vertex(new Vector3D([0, 10, 0])),
@@ -15,7 +15,7 @@ test('CSG can be created from polygons', t => {
   t.deepEqual(obsCSG.polygons, polygons)
 })
 
-test('CSG can be created from objects', t => {
+it('CSG can be created from objects', function () {
   const input = {
     polygons: [{
       vertices: [

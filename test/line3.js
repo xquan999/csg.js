@@ -1,9 +1,8 @@
-import test from 'ava'
-import {CSG} from '../csg'
-import {CAG} from '../csg'
+var t = require('assert');
+var csg = require("../csg"); let CSG = csg.CSG; let CAG = csg.CAG;
 
 function planeEquals (t, observed, expected) {
-  t.is(observed.w,expected.w)
+  t.equal(observed.w,expected.w)
   return t.deepEqual(observed.normal, expected.normal)
 }
 
@@ -17,7 +16,7 @@ function vector3Equals (t, observed, expected) {
   return t.deepEqual(obs, expected)
 }
 
-test('CSG.Line3 constructors create valid lines', t => {
+it('CSG.Line3 constructors create valid lines', function () {
   const Line3 = CSG.Line3D
   const Vector3 = CSG.Vector3D
   const Plane = CSG.Plane
@@ -26,7 +25,7 @@ test('CSG.Line3 constructors create valid lines', t => {
   let l2 = new Line3(l1.point,l1.direction)
 
   t.deepEqual(l1, l2)
-  t.is(l1.equals(l2),true)
+  t.equal(l1.equals(l2),true)
 
   let a = new Vector3(0,0,0)
   let b = new Vector3(10,10,0)
@@ -45,7 +44,7 @@ test('CSG.Line3 constructors create valid lines', t => {
   t.deepEqual(l4, l1)
 })
 
-test('CSG.Line3 transforms', t => {
+it('CSG.Line3 transforms', function () {
   const Line3 = CSG.Line3D
   const Vector3 = CSG.Vector3D
   const Plane = CSG.Plane
@@ -66,7 +65,7 @@ test('CSG.Line3 transforms', t => {
   vector3Equals(t,l3.direction,[0.5773502691896247,-0.5773502691896278,-0.5773502691896247])
 })
 
-test('CSG.Line3 geometry calculations', t => {
+it('CSG.Line3 geometry calculations', function () {
   const Line3 = CSG.Line3D
   const Vector3 = CSG.Vector3D
   const Plane = CSG.Plane
@@ -84,7 +83,7 @@ test('CSG.Line3 geometry calculations', t => {
   vector3Equals(t,i1,[0,0,0])
 
   let d1 = l1.distanceToPoint([1,1,0])
-  t.is(d1,0.816496580927726)
+  t.equal(d1,0.816496580927726)
 
   let i2 = l1.closestPointOnLine([1,1,0])
   vector3Equals(t,i2,[0.6666666666666661,0.6666666666666661,0.6666666666666661])

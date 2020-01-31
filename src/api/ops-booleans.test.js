@@ -1,9 +1,9 @@
-const test = require('ava')
+var t = require('assert');
 const { cube, sphere } = require('./primitives3d-api')
 const { square } = require('./primitives2d-api')
 const { union, difference, intersection } = require('./ops-booleans')
 
-test('union (defaults)', t => {
+it('union (defaults)', function () {
   const op1 = cube()
   const op2 = cube({size: 10})
 
@@ -12,7 +12,7 @@ test('union (defaults)', t => {
   t.deepEqual(obs.polygons.length, 6)
 })
 
-test('union (more than 2 operands)', t => {
+it('union (more than 2 operands)', function () {
   const op1 = cube()
   const op2 = cube()
   const op3 = cube({size: 10})
@@ -22,7 +22,7 @@ test('union (more than 2 operands)', t => {
   t.deepEqual(obs.polygons.length, 6)
 })
 
-test('union (complex)', t => {
+it('union (complex)', function () {
   const obs = union(
         difference(
            cube({size: 3, center: true}),
@@ -37,7 +37,7 @@ test('union (complex)', t => {
   t.deepEqual(obs.polygons.length, 610)
 })
 
-test('union (2d & 3d shapes)', t => {
+it('union (2d & 3d shapes)', function () {
   const op1 = cube()
   const op2 = square([10, 2])
 
@@ -46,7 +46,7 @@ test('union (2d & 3d shapes)', t => {
   t.deepEqual(obs.polygons.length, 6)
 })
 
-test('difference (defaults)', t => {
+it('difference (defaults)', function () {
   const op1 = cube({size: [10, 10, 1]})
   const op2 = cube({size: [1, 1, 10]})
 
@@ -55,7 +55,7 @@ test('difference (defaults)', t => {
   t.deepEqual(obs.polygons.length, 10)
 })
 
-test('difference (more than 2 operands)', t => {
+it('difference (more than 2 operands)', function () {
   const op1 = cube({size: [10, 10, 1]})
   const op2 = cube({size: [1, 1, 10]})
   const op3 = cube({size: [3, 3, 10]})
@@ -65,7 +65,7 @@ test('difference (more than 2 operands)', t => {
   t.deepEqual(obs.polygons.length, 10)
 })
 
-test('difference (2d & 3d shapes)', t => {
+it('difference (2d & 3d shapes)', function () {
   const op1 = cube({size: [10, 10, 1]})
   const op2 = square([10, 2])
 
@@ -74,7 +74,7 @@ test('difference (2d & 3d shapes)', t => {
   t.deepEqual(obs.polygons.length, 6)
 })
 
-test('intersection (defaults)', t => {
+it('intersection (defaults)', function () {
   const op1 = cube({size: [10, 10, 1]})
   const op2 = cube({size: [1, 1, 10]})
 
@@ -83,7 +83,7 @@ test('intersection (defaults)', t => {
   t.deepEqual(obs.polygons.length, 10)
 })
 
-test('intersection (more than 2 operands)', t => {
+it('intersection (more than 2 operands)', function () {
   const op1 = cube({size: [10, 10, 1]})
   const op2 = cube({size: [1, 1, 10]})
   const op3 = cube({size: [3, 3, 10]})
@@ -93,7 +93,7 @@ test('intersection (more than 2 operands)', t => {
   t.deepEqual(obs.polygons.length, 6)
 })
 
-test('intersection (2d & 3d shapes)', t => {
+it('intersection (2d & 3d shapes)', function () {
   const op1 = cube({size: [10, 10, 1]})
   const op2 = cube({size: [1, 1, 10]})
 

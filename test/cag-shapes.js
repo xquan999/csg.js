@@ -1,13 +1,13 @@
-import test from 'ava'
-import {CAG} from '../csg'
-import {OBJ} from './helpers/obj-store'
-import {CAGNearlyEquals} from './helpers/asserts'
+var t = require('assert');
+var csg = require("../csg"); let CSG = csg.CSG; let CAG = csg.CAG;
+var obj_store = require('./helpers/obj-store'); let OBJ = obj_store.OBJ;
+const {CAGNearlyEquals} = require('./helpers/asserts');
 
 //
 // Test suite for CAG Common Shapes
 //
 
-test('CAG should produce proper circles', t => {
+it('CAG should produce proper circles', function () {
   var initCache = true
 
   var c1 = CAG.circle() // center:[0,0],radius:1,resolution:defaultResolution2D
@@ -22,7 +22,7 @@ test('CAG should produce proper circles', t => {
   t.deepEqual(c4, OBJ.loadPrevious('cag.c4', c4))
 })
 
-test('CAG should produce proper ellipses', t => {
+it('CAG should produce proper ellipses', function () {
   var initCache = true
 
   var e1 = CAG.ellipse() // center:[0,0],radius:[1,1],resolution:defaultResolution2D
@@ -31,13 +31,13 @@ test('CAG should produce proper ellipses', t => {
   var e4 = CAG.ellipse({resolution: 4})
 
 // verify that object structures do not change
-  t.true(CAGNearlyEquals(e1, OBJ.loadPrevious('cag.e1', e1)))
-  t.true(CAGNearlyEquals(e2, OBJ.loadPrevious('cag.e2', e2)))
-  t.true(CAGNearlyEquals(e3, OBJ.loadPrevious('cag.e3', e3)))
-  t.true(CAGNearlyEquals(e4, OBJ.loadPrevious('cag.e4', e4)))
+  t.equal(CAGNearlyEquals(e1, OBJ.loadPrevious('cag.e1', e1)), true)
+  t.equal(CAGNearlyEquals(e2, OBJ.loadPrevious('cag.e2', e2)), true)
+  t.equal(CAGNearlyEquals(e3, OBJ.loadPrevious('cag.e3', e3)), true)
+  t.equal(CAGNearlyEquals(e4, OBJ.loadPrevious('cag.e4', e4)), true)
 })
 
-test('CAG should produce proper rectangles', t => {
+it('CAG should produce proper rectangles', function () {
   var initCache = true
 
   var r1 = CAG.rectangle() // center: [0,0],radius[1,1]
@@ -52,7 +52,7 @@ test('CAG should produce proper rectangles', t => {
   t.deepEqual(r4, OBJ.loadPrevious('cag.r4', r4))
 })
 
-test('CAG should produce proper rounded rectangles', t => {
+it('CAG should produce proper rounded rectangles', function () {
   var initCache = true
 
   var rr1 = CAG.roundedRectangle() // center:[0,0],radius:[1,1],roundradius:0.2,resolution:defaultResolution2D

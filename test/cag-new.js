@@ -1,5 +1,5 @@
-import test from 'ava'
-import {CSG, CAG} from '../csg'
+var t = require('assert');
+var csg = require("../csg"); let CSG = csg.CSG; let CAG = csg.CAG;
 
 //
 // Test suite for CAG initialization (new)
@@ -7,33 +7,33 @@ import {CSG, CAG} from '../csg'
 // - verify that CAG functions do / return nothing
 // - verify that the CAG converts to/from properly
 //
-test('New CAG should contain nothing', t => {
+it('New CAG should contain nothing', function () {
   const cag = new CAG()
 
 // conversion functions
-  t.is(cag.toString(), 'CAG (0 sides):\n')
-  t.is(cag.isSelfIntersecting(), false)
+  t.equal(cag.toString(), 'CAG (0 sides):\n')
+  t.equal(cag.isSelfIntersecting(), false)
 
   var area = cag.area()
-  t.is(area, 0)
+  t.equal(area, 0)
 
   var bounds = cag.getBounds()
-  t.true(Array.isArray(bounds))
-  t.is(bounds.length, 2)
-  t.is(typeof bounds[0], 'object')
-  t.is(typeof bounds[1], 'object')
+  t.equal(Array.isArray(bounds), true)
+  t.equal(bounds.length, 2)
+  t.equal(typeof bounds[0], 'object')
+  t.equal(typeof bounds[1], 'object')
 
   var vector0 = bounds[0]
-  t.is(typeof vector0, 'object')
-  t.is(vector0.x, 0)
-  t.is(vector0.y, 0)
+  t.equal(typeof vector0, 'object')
+  t.equal(vector0.x, 0)
+  t.equal(vector0.y, 0)
   var vector1 = bounds[1]
-  t.is(typeof vector1, 'object')
-  t.is(vector1.x, 0)
-  t.is(vector1.y, 0)
+  t.equal(typeof vector1, 'object')
+  t.equal(vector1.x, 0)
+  t.equal(vector1.y, 0)
 })
 
-test('New CAG should do nothing', t => {
+it('New CAG should do nothing', function () {
   var cag = new CAG()
 
   //t.deepEqual(cag.canonicalized(), cag)
@@ -56,7 +56,7 @@ test('New CAG should do nothing', t => {
   t.deepEqual(cag5, cag)
 })
 
-test('New CAG should return empty values', t => {
+it('New CAG should return empty values', function () {
   var cag = new CAG().canonicalized()
 
 // test internals
@@ -66,12 +66,12 @@ test('New CAG should return empty values', t => {
 
   var matrixB = CSG.Matrix4x4.translation([10, 10, 0])
   var pairs3D = cag._toVector3DPairs(matrixB)
-  t.true(Array.isArray(pairs3D))
-  t.is(pairs3D.length, 0)
+  t.equal(Array.isArray(pairs3D), true)
+  t.equal(pairs3D.length, 0)
 
   var polys3D = cag._toPlanePolygons({}) // use defaults
-  t.true(Array.isArray(polys3D))
-  // FIXME : t.is(polys3D.length, 0);
+  t.equal(Array.isArray(polys3D), true)
+  // FIXME : t.equal(polys3D.length, 0);
 
   // var connector1 = new CSG.Connector(offsetVector.times(i / twiststeps), [0, 0, 1],
   //                normalVector.rotateZ(i * twistangle/twiststeps));
@@ -81,8 +81,8 @@ test('New CAG should return empty values', t => {
 
 // test externals
   var paths = cag.getOutlinePaths()
-  t.true(Array.isArray(paths))
-  t.is(paths.length, 0)
+  t.equal(Array.isArray(paths), true)
+  t.equal(paths.length, 0)
 
   var cagC = cag.overCutInsideCorners()
   t.deepEqual(cag, cagC)
@@ -95,14 +95,14 @@ test('New CAG should return empty values', t => {
   t.deepEqual(cag, cag3)
 })
 
-test('New CAG should convert properly', t => {
+it('New CAG should convert properly', function () {
   var cag = new CAG()
 
 // to from binary
   var binary = cag.toCompactBinary()
-  t.is(binary.class, 'CAG')
-  t.is(binary.sideVertexIndices.length, 0)
-  t.is(binary.vertexData.length, 0)
+  t.equal(binary.class, 'CAG')
+  t.equal(binary.sideVertexIndices.length, 0)
+  t.equal(binary.vertexData.length, 0)
 
 // to 3D objects
   var csgNew = new CSG()

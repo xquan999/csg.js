@@ -1,5 +1,5 @@
-import fs from 'fs'
-import {CSG, CAG} from '../../csg' //FIXME: BAD!! tests are supposed to be independant from our CODE !!
+var fs = require('fs');
+var csg = require("../../csg"); let CSG = csg.CSG; let CAG = csg.CAG; //FIXME: BAD!! tests are supposed to be independant from our CODE !!
 
 // import the required modules if necessary
 

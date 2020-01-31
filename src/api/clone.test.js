@@ -1,8 +1,8 @@
-const test = require('ava')
+var t = require('assert');
 const { cube } = require('./primitives3d-api')
 const { clone } = require('./clone')
 
-test('clone', t => {
+it('clone', function () {
   const obs = clone(cube())
   const expFirstPoly = {
     vertices: [ { pos: { _x: 0, _y: 0, _z: 0 } },

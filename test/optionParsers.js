@@ -1,33 +1,33 @@
-const test = require('ava')
+var t = require('assert');
 const CSG = require('../csg')
 
-// NOTE: these are kept for now as a way to make sure the root 
+// NOTE: these are kept for now as a way to make sure the root
 // exported object from csg.js has all these helpers
 
-test('root csg objects provides parseOption', t => {
-  t.true(CSG.hasOwnProperty('parseOptionAsFloat'))
+it('root csg objects provides parseOption', function () {
+  t.equal(CSG.hasOwnProperty('parseOptionAsFloat'), true)
 })
 
-test('root csg objects provides parseOptionAsFloat', t => {
-  t.true(CSG.hasOwnProperty('parseOptionAsFloat'))
+it('root csg objects provides parseOptionAsFloat', function () {
+  t.equal(CSG.hasOwnProperty('parseOptionAsFloat'), true)
 })
 
-test('root csg objects provides parseOptionAsInt', t => {
-  t.true(CSG.hasOwnProperty('parseOptionAsInt'))
+it('root csg objects provides parseOptionAsInt', function () {
+  t.equal(CSG.hasOwnProperty('parseOptionAsInt'), true)
 })
 
-test('root csg objects provides parseOptionAsBool', t => {
-  t.true(CSG.hasOwnProperty('parseOptionAsBool'))
+it('root csg objects provides parseOptionAsBool', function () {
+  t.equal(CSG.hasOwnProperty('parseOptionAsBool'), true)
 })
 
-test('root csg objects provides parseOptionAs2DVector', t => {
-  t.true(CSG.hasOwnProperty('parseOptionAs2DVector'))
+it('root csg objects provides parseOptionAs2DVector', function () {
+  t.equal(CSG.hasOwnProperty('parseOptionAs2DVector'), true)
 })
 
-test('root csg objects provides parseOptionAs3DVector', t => {
-  t.true(CSG.hasOwnProperty('parseOptionAs3DVector'))
+it('root csg objects provides parseOptionAs3DVector', function () {
+  t.equal(CSG.hasOwnProperty('parseOptionAs3DVector'), true)
 })
 
-test('root csg objects provides parseOptionAs3DVectorList', t => {
-  t.true(CSG.hasOwnProperty('parseOptionAs3DVectorList'))
+it('root csg objects provides parseOptionAs3DVectorList', function () {
+  t.equal(CSG.hasOwnProperty('parseOptionAs3DVectorList'), true)
 })

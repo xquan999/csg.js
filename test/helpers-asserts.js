@@ -1,26 +1,26 @@
-import test from 'ava'
-import {comparePolygons} from './helpers/asserts'
+var t = require('assert');
+const {comparePolygons} = require('./helpers/asserts')
 
-test('comparePolygons on same single vertex', t => {
+it('comparePolygons on same single vertex', function () {
   let a = {vertices: [{_x: 0, _y: 0, _z: 0}]}
-  t.true(comparePolygons(a, a))
+  t.equal(comparePolygons(a, a), true)
 })
 
-test('comparePolygons on different vertices', t => {
+it('comparePolygons on different vertices', function () {
   let a = {vertices: [{_x: 0, _y: 0, _z: 0}]}, b = {vertices: [{_x: 1, _y: 1, _z: 1}]}
-  t.false(comparePolygons(a, b))
+  t.equal(false, comparePolygons(a, b))
 })
 
-test('comparePolygons on same polygon', t => {
+it('comparePolygons on same polygon', function () {
   let a = {vertices: [
         {_x: 0, _y: 0, _z: 0},
         {_x: 1, _y: 1, _z: 1},
         {_x: -1, _y: 1, _z: 1}
   ]}
-  t.true(comparePolygons(a, a))
+  t.equal(comparePolygons(a, a), true)
 })
 
-test('comparePolygons on same polygon with different vertice order', t => {
+it('comparePolygons on same polygon with different vertice order', function () {
   let a = {vertices: [
             {_x: 0, _y: 0, _z: 0},
             {_x: 1, _y: 1, _z: 1},
@@ -31,10 +31,10 @@ test('comparePolygons on same polygon with different vertice order', t => {
             {_x: 0, _y: 0, _z: 0},
             {_x: 1, _y: 1, _z: 1}
     ]}
-  t.true(comparePolygons(a, b))
+  t.equal(comparePolygons(a, b), true)
 })
 
-test('comparePolygons on different polygon with same vertice', t => {
+it('comparePolygons on different polygon with same vertice', function () {
   let a = {vertices: [
             {_x: 0, _y: 0, _z: 0},
             {_x: 1, _y: 1, _z: 1},
@@ -45,5 +45,5 @@ test('comparePolygons on different polygon with same vertice', t => {
             {_x: -1, _y: 1, _z: 1},
             {_x: 1, _y: 1, _z: 1}
     ]}
-  t.false(comparePolygons(a, b))
+  t.equal(false, comparePolygons(a, b))
 })

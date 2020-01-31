@@ -1,7 +1,7 @@
-const test = require('ava')
+var t = require('assert');
 const { lookup } = require('./maths')
 
-test('lookup', t => {
+it('lookup', function () {
   const values = [
     [ -200, 5 ],
     [ -50, 20 ],

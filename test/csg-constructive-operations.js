@@ -1,6 +1,6 @@
-import test from 'ava'
-import {CSG} from '../csg'
-import {assertSameGeometry} from './helpers/asserts'
+var t = require('assert');
+var csg = require("../csg"); let CSG = csg.CSG; let CAG = csg.CAG;
+var help = require('./helpers/asserts'); let assertSameGeometry = help.assertSameGeometry;
 
 function createOperands () {
   const a = CSG.cube({
@@ -19,15 +19,15 @@ function createOperands () {
 }
 
 // Constructive operations
-test('CSG.union', t => {
+it('CSG.union', function () {
   const {a, b, c} = createOperands()
   assertSameGeometry(t, a.union(b), c)
 })
-test('CSG.intersect', t => {
+it('CSG.intersect', function () {
   const {a, b, c} = createOperands()
   assertSameGeometry(t, c.intersect(b), b)
 })
-test('CSG.subtract', t => {
+it('CSG.subtract', function () {
   const {a, b, c} = createOperands()
   assertSameGeometry(t, c.subtract(a), b)
 })
